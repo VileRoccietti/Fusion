@@ -34,7 +34,8 @@ enum TransformEditor {
                 let vertexCount = mesh.vertexCount
                 let descriptor = mesh.vertexDescriptor
                 guard let posAttr = descriptor.attributeNamed(MDLVertexAttributePosition) else { continue }
-                let stride = descriptor.layouts[posAttr.bufferIndex].stride
+                guard let layout = descriptor.layouts[posAttr.bufferIndex] as? MDLVertexBufferLayout else { continue }
+                let stride = layout.stride
 
                 var minVec = SIMD3<Float>(repeating: .greatestFiniteMagnitude)
                 var maxVec = SIMD3<Float>(repeating: -.greatestFiniteMagnitude)

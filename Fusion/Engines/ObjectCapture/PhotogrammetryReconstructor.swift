@@ -45,7 +45,7 @@ struct PhotogrammetryReconstructor {
         var effectiveMask = maskRect
         if maskRect != nil, let probe = imageURLs.first {
             do {
-                _ = try PhotogrammetrySample(contentsOf: probe)
+                _ = try await PhotogrammetrySample(contentsOf: probe)
             } catch {
                 effectiveMask = nil
                 Self.logger.error("No se pudo leer la muestra con máscara: \(error.localizedDescription, privacy: .public)")

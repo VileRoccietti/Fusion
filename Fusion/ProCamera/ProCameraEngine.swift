@@ -117,16 +117,18 @@ final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureV
 
     func start() {
         guard !session.isRunning else { return }
+        let captureSession = self.session
         cameraQueue.async { [weak self] in
-            self?.session.startRunning()
+            captureSession.startRunning()
             Task { @MainActor in self?.isRunning = true }
         }
     }
 
     func stop() {
         guard session.isRunning else { return }
+        let captureSession = self.session
         cameraQueue.async { [weak self] in
-            self?.session.stopRunning()
+            captureSession.stopRunning()
             Task { @MainActor in self?.isRunning = false }
         }
     }

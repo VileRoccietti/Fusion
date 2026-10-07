@@ -15,9 +15,7 @@ final class FocusPeakingFilter {
         guard let edgeOutput = edgesFilter.outputImage else { return nil }
 
         // Mask with tint color
-        let colorGenerator = CIFilter.constantColorGenerator()
-        colorGenerator.color = CIColor(color: peakingColor)
-        guard let colorOutput = colorGenerator.outputImage else { return edgeOutput }
+        let colorOutput = CIImage(color: CIColor(color: peakingColor))
 
         let blendFilter = CIFilter.blendWithMask()
         blendFilter.inputImage = colorOutput

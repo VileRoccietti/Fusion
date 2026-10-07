@@ -45,6 +45,7 @@ struct StudioViewport3D: UIViewRepresentable {
 
     // MARK: - Coordinator
 
+    @MainActor
     final class Coordinator: NSObject {
         var currentURL: URL
         var scene: SCNScene?

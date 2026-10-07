@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Full-featured 3D Modeler & AR Studio
 struct ModelStudioView: View {
-    @Bindable var record: ScanRecord
+    let record: ScanRecord
     @Environment(ScanStorage.self) private var storage
     @Environment(\.dismiss) private var dismiss
 

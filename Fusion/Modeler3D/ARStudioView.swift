@@ -90,7 +90,7 @@ struct ARStudioView: View {
 
     private var rulerHUD: some View {
         VStack(spacing: 8) {
-            if let start = rulerTool.activeStartPoint {
+            if rulerTool.activeStartPoint != nil {
                 Text("Toca el segundo punto para medir la distancia.")
                     .font(.caption)
                     .foregroundStyle(.yellow)
@@ -213,10 +213,11 @@ private struct ARViewContainer: UIViewRepresentable {
         context.coordinator.parent = self
     }
 
+    @MainActor
     final class Coordinator: NSObject, ARSessionDelegate {
         var parent: ARViewContainer
         weak var arView: ARView?
-        var modelEntity: ModelEntity?
+        var modelEntity: Entity?
         var modelAnchor: AnchorEntity?
 
         init(_ parent: ARViewContainer) {
@@ -254,9 +255,11 @@ private struct ARViewContainer: UIViewRepresentable {
 
             Task { @MainActor in
                 do {
-                    let entity = try ModelEntity.loadModel(contentsOf: parent.modelURL)
+                    let entity = try await Entity(contentsOf: parent.modelURL)
                     entity.generateCollisionShapes(recursive: true)
-                    arView.installGestures([.rotation, .translation], for: entity)
+                    if let collisionEntity = entity as? HasCollision {
+                        arView.installGestures([.rotation, .translation], for: collisionEntity)
+                    }
 
                     let anchor = AnchorEntity(world: transform)
                     anchor.addChild(entity)

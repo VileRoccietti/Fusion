@@ -1,4 +1,4 @@
-import QuickLookThumbnailing
+@preconcurrency import QuickLookThumbnailing
 import SwiftUI
 
 /// Rendered preview of a USDZ, for library rows and grids.
