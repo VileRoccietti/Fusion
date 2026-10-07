@@ -52,9 +52,9 @@ jobs:
         run: |
           mkdir -p build
 
-          # Temporarily isolate Assets.xcassets during archive to prevent actool simulator runtime lookup in headless CI
+          # Temporarily isolate Assets.xcassets outside source directory during archive
           if [ -d "Fusion/Assets.xcassets" ]; then
-            mv Fusion/Assets.xcassets Fusion/Assets.xcassets.ci_backup
+            mv Fusion/Assets.xcassets /tmp/Assets.xcassets
           fi
 
           set -o pipefail
@@ -71,8 +71,8 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO 2>&1 | tee build/xcodebuild.log || true
 
           # Restore Assets.xcassets
-          if [ -d "Fusion/Assets.xcassets.ci_backup" ]; then
-            mv Fusion/Assets.xcassets.ci_backup Fusion/Assets.xcassets
+          if [ -d "/tmp/Assets.xcassets" ]; then
+            mv /tmp/Assets.xcassets Fusion/Assets.xcassets
           fi
 
           if [ ! -d "build/Fusion.xcarchive" ]; then
@@ -106,6 +106,9 @@ jobs:
 
           APP_DIR="build/Payload/Fusion.app"
           ICON_SRC="Fusion/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+          if [ ! -f "$ICON_SRC" ] && [ -f "/tmp/Assets.xcassets/AppIcon.appiconset/AppIcon.png" ]; then
+            ICON_SRC="/tmp/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+          fi
 
           if [ -f "$ICON_SRC" ]; then
             echo "Embedding AppIcon into Fusion.app..."
