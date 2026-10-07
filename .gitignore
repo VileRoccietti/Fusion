@@ -1,0 +1,28 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+build/
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xcuserdatad
+!default.mode1v3
+!default.mode2v3
+!default.pbxuser
+!default.perspectivev3
+xcuserdata/
+
+# Archives and IPAs
+*.xcarchive
+*.ipa
+Payload/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
