@@ -52,12 +52,12 @@ enum PlanarCutter {
 
                 guard let posAttr = vertexDescriptor.attributeNamed(MDLVertexAttributePosition) else { continue }
                 guard let layout = vertexDescriptor.layouts[posAttr.bufferIndex] as? MDLVertexBufferLayout else { continue }
-                let stride = layout.stride
+                let vertexStride = layout.stride
 
                 // Mask vertices above cutoff
                 var keepVertex = [Bool](repeating: true, count: vertexCount)
                 for v in 0..<vertexCount {
-                    let offset = v * stride + posAttr.offset
+                    let offset = v * vertexStride + posAttr.offset
                     let y = vertexData.load(fromByteOffset: offset + MemoryLayout<Float>.size, as: Float.self)
                     if y < cutoffY {
                         keepVertex[v] = false

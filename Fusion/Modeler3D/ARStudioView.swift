@@ -275,25 +275,29 @@ private struct ARViewContainer: UIViewRepresentable {
             }
         }
 
-        func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        nonisolated func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+            let text: String
             switch camera.trackingState {
             case .normal:
-                parent.trackingStateText = "Listo: Superficie lista"
+                text = "Listo: Superficie lista"
             case .notAvailable:
-                parent.trackingStateText = "Seguimiento no disponible"
+                text = "Seguimiento no disponible"
             case .limited(let reason):
                 switch reason {
                 case .initializing:
-                    parent.trackingStateText = "Iniciando LiDAR..."
+                    text = "Iniciando LiDAR..."
                 case .relocalizing:
-                    parent.trackingStateText = "Relocalizando..."
+                    text = "Relocalizando..."
                 case .excessiveMotion:
-                    parent.trackingStateText = "Movimiento rápido"
+                    text = "Movimiento rápido"
                 case .insufficientFeatures:
-                    parent.trackingStateText = "Apunta a una superficie con textura"
+                    text = "Apunta a una superficie con textura"
                 @unknown default:
-                    parent.trackingStateText = "Seguimiento limitado"
+                    text = "Seguimiento limitado"
                 }
+            }
+            Task { @MainActor in
+                self.parent.trackingStateText = text
             }
         }
     }
