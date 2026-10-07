@@ -24,29 +24,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Select Xcode 16
+      - name: Select Xcode 16.2
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.2'
+
+      - name: Run First Launch
         run: |
-          echo "Available Xcode installations:"
-          ls -d /Applications/Xcode* || true
-          
-          if [ -d "/Applications/Xcode_16.1.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.1.app
-          elif [ -d "/Applications/Xcode_16.0.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.0.app
-          elif [ -d "/Applications/Xcode_16.2.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.2.app
-          elif [ -d "/Applications/Xcode_16.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.app
-          else
-            echo "Defaulting to active Xcode..."
-          fi
-          
+          sudo xcodebuild -runFirstLaunch || true
           xcodebuild -version
           xcrun simctl list runtimes || true
 
       - name: Build & Archive iOS App
         run: |
           mkdir -p build
+
+          # Temporarily isolate Assets.xcassets during archive to prevent actool simulator runtime lookup in headless CI
+          if [ -d "Fusion/Assets.xcassets" ]; then
+            mv Fusion/Assets.xcassets Fusion/Assets.xcassets.ci_backup
+          fi
+
           set -o pipefail
           xcodebuild archive \
             -project Fusion.xcodeproj \
@@ -58,7 +55,15 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            ASSETCATALOG_COMPILER_APPICON_NAME="" \
+            ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME="" \
+            ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS=NO \
             COMPILER_INDEX_STORE_ENABLE=NO 2>&1 | tee build/xcodebuild.log || true
+
+          # Restore Assets.xcassets
+          if [ -d "Fusion/Assets.xcassets.ci_backup" ]; then
+            mv Fusion/Assets.xcassets.ci_backup Fusion/Assets.xcassets
+          fi
 
           if [ ! -d "build/Fusion.xcarchive" ]; then
             echo "::error title=Build Failure::Xcodebuild archive failed."
@@ -88,6 +93,30 @@ jobs:
         run: |
           mkdir -p build/Payload
           cp -r build/Fusion.xcarchive/Products/Applications/Fusion.app build/Payload/
+
+          APP_DIR="build/Payload/Fusion.app"
+          ICON_SRC="Fusion/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+
+          if [ -f "$ICON_SRC" ]; then
+            echo "Embedding AppIcon into Fusion.app..."
+            cp "$ICON_SRC" "$APP_DIR/AppIcon.png"
+            cp "$ICON_SRC" "$APP_DIR/AppIcon1024x1024.png"
+            sips -z 120 120 "$ICON_SRC" --out "$APP_DIR/AppIcon60x60@2x.png" || true
+            sips -z 180 180 "$ICON_SRC" --out "$APP_DIR/AppIcon60x60@3x.png" || true
+            sips -z 152 152 "$ICON_SRC" --out "$APP_DIR/AppIcon76x76@2x~ipad.png" || true
+            sips -z 167 167 "$ICON_SRC" --out "$APP_DIR/AppIcon83.5x83.5@2x~ipad.png" || true
+          fi
+
+          if [ -f "$APP_DIR/Info.plist" ]; then
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon.png" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIcons dict" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon dict" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles array" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:0 string AppIcon60x60" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:1 string AppIcon" "$APP_DIR/Info.plist" || true
+            /usr/libexec/PlistBuddy -c "Set :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName AppIcon" "$APP_DIR/Info.plist" || /usr/libexec/PlistBuddy -c "Add :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName string AppIcon" "$APP_DIR/Info.plist" || true
+          fi
+
           cd build
           zip -qr Fusion.ipa Payload
           cd ..
