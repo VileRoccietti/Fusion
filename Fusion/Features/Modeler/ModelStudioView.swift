@@ -102,7 +102,7 @@ struct ModelStudioView: View {
         }
         .preferredColorScheme(.dark)
         .fullScreenCover(isPresented: $showARStudio) {
-            ARStudioView(modelURL: currentModelURL)
+            ARImmersiveScanView(modelURL: currentModelURL, scanName: record.name)
         }
         .sheet(isPresented: $showShareSheet) {
             if let shareableURL {

@@ -73,14 +73,33 @@ enum DeviceCapabilities {
         rearCaptureDevices.filter { !$0.isVirtual }.count
     }
 
-    /// Checks if device has 48MP Pro sensor capabilities
+    /// Checks if device has 48MP Pro sensor capabilities (Quad-Pixel 48MP on iPhone 14 Pro/15 Pro/16 Pro)
     static var has48MPFusionSensor: Bool {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else { return false }
         for format in device.formats {
-            let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
-            if dims.width >= 8000 || dims.height >= 6000 {
+            // Check iOS 16+ supportedMaxPhotoDimensions (8064 x 6048 = 48MP)
+            for dim in format.supportedMaxPhotoDimensions {
+                if dim.width >= 7000 || dim.height >= 5000 {
+                    return true
+                }
+            }
+            // Check secondary native resolution zoom factors (2x sensor crop on 48MP Quad-Pixel)
+            if !format.secondaryNativeResolutionZoomFactors.isEmpty {
                 return true
             }
+            // Check highResolutionStillImageDimensions
+            let high = format.highResolutionStillImageDimensions
+            if high.width >= 7000 || high.height >= 5000 {
+                return true
+            }
+            let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
+            if dims.width >= 7000 || dims.height >= 5000 {
+                return true
+            }
+        }
+        // iPhone Pro models with Triple Camera and LiDAR always feature the 48MP sensor
+        if supportsObjectCapture && AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) != nil {
+            return true
         }
         return false
     }
@@ -99,12 +118,22 @@ enum DeviceCapabilities {
         return nil
     }
 
-    /// Factory calibration between front and rear sensors
-    static var hasFrontToRearCalibration: Bool {
-        guard let rear = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
-              let front = AVCaptureDevice.default(.builtInTrueDepthCamera, for: .video, position: .front)
-        else { return false }
-        return AVCaptureDevice.extrinsicMatrix(from: rear, to: front) != nil
+    /// Factory optical calibration between lenses and LiDAR sensor
+    static var hasMulticameraCalibration: Bool {
+        guard let rear = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else { return false }
+        if let ultraWide = AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back),
+           AVCaptureDevice.extrinsicMatrix(from: rear, to: ultraWide) != nil {
+            return true
+        }
+        if let tele = AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back),
+           AVCaptureDevice.extrinsicMatrix(from: rear, to: tele) != nil {
+            return true
+        }
+        if let lidar = AVCaptureDevice.default(.builtInLiDARDepthCamera, for: .video, position: .back),
+           AVCaptureDevice.extrinsicMatrix(from: rear, to: lidar) != nil {
+            return true
+        }
+        return AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) != nil
     }
 
     /// Hardware capabilities summary list for pre-flight diagnostics
@@ -119,7 +148,7 @@ enum DeviceCapabilities {
             ("Cámara Ultra Gran Angular", AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back) != nil),
             ("Teleobjetivo Tetraprisma (5x)", AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back) != nil),
             ("Sensor TrueDepth Frontal", hasTrueDepthCamera),
-            ("Calibración Frontal ↔ Trasera", hasFrontToRearCalibration)
+            ("Calibración Óptica Multilente & LiDAR", hasMulticameraCalibration)
         ]
     }
 }

@@ -6,19 +6,29 @@ struct RootView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Escanear 3D", systemImage: "cube.transparent", value: 0) {
+            Tab("Cámara & Cine", systemImage: "camera.aperture", value: 0) {
+                ProCameraView()
+            }
+
+            Tab("Escanear 3D", systemImage: "cube.transparent", value: 1) {
                 NavigationStack {
                     ScanSetupView()
                 }
             }
 
-            Tab("Cámara Pro", systemImage: "camera.aperture", value: 1) {
-                ProCameraView()
+            Tab("LiDAR Live", systemImage: "point.3.filled.connected.triangle.path.dotted", value: 2) {
+                HegesLiveStreamView()
             }
 
-            Tab("Estudio 3D", systemImage: "square.stack.3d.up.fill", value: 2) {
+            Tab("Estudio & AR", systemImage: "arkit", value: 3) {
                 NavigationStack {
                     LibraryView()
+                }
+            }
+
+            Tab("Galería Pro", systemImage: "photo.stack", value: 4) {
+                NavigationStack {
+                    MediaGalleryView()
                 }
             }
         }

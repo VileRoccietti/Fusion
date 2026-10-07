@@ -1,13 +1,79 @@
-import AVFoundation
+@preconcurrency import AVFoundation
 import SwiftUI
 
-/// Professional manual camera studio view for iPhone 16 Pro Max
+/// Top-level camera operational modes
+enum CameraHubMode: String, CaseIterable, Identifiable, Sendable {
+    case photo = "FOTO"
+    case video = "VIDEO"
+    case nightVision = "NOCTURNO"
+
+    var id: String { rawValue }
+
+    var icon: String {
+        switch self {
+        case .photo: "camera.fill"
+        case .video: "video.fill"
+        case .nightVision: "moon.stars.fill"
+        }
+    }
+}
+
+/// Camera mode selector row mimicking native iOS camera ergonomics
+struct CameraModeSelectorRow: View {
+    @Binding var currentMode: CameraHubMode
+
+    var body: some View {
+        HStack(spacing: 20) {
+            ForEach(CameraHubMode.allCases) { mode in
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        currentMode = mode
+                    }
+                    HapticFeedback.selection()
+                } label: {
+                    Text(mode.rawValue)
+                        .font(.system(size: 13, weight: currentMode == mode ? .black : .bold, design: .rounded))
+                        .foregroundStyle(currentMode == mode ? Color.yellow : Color.white.opacity(0.6))
+                        .scaleEffect(currentMode == mode ? 1.08 : 0.95)
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 8)
+                }
+            }
+        }
+    }
+}
+
+/// Master Hub Camera View with seamless switching between 48MP ProRAW, 4K/120 Cine Video, and LiDAR Night Vision
 struct ProCameraView: View {
+    @State private var currentMode: CameraHubMode = .photo
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            switch currentMode {
+            case .photo:
+                PhotoCameraStudioView(currentMode: $currentMode)
+            case .video:
+                ProVideoView(currentMode: $currentMode)
+            case .nightVision:
+                LiDARNightVisionView(currentMode: $currentMode)
+            }
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - 48MP ProRAW Photo Studio View
+
+struct PhotoCameraStudioView: View {
+    @Binding var currentMode: CameraHubMode
     @State private var engine = ProCameraEngine()
     @StateObject private var horizonGuide = HorizonLevelGuide()
 
     @State private var selectedControl: ManualControlTab = .exposure
     @State private var showGrid = true
+    @State private var showZoomWheel = false
 
     enum ManualControlTab: String, CaseIterable, Identifiable {
         case exposure = "EXP"
@@ -47,14 +113,25 @@ struct ProCameraView: View {
             HorizonLevelOverlay(guide: horizonGuide)
 
             // UI Chrome
-            VStack {
+            VStack(spacing: 0) {
                 topToolbar
                 Spacer()
+
+                if showZoomWheel {
+                    ZoomWheelControl(zoomFactor: Binding(
+                        get: { engine.activeLens.zoomFactor },
+                        set: { _ in }
+                    ))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 6)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
                 manualControlsBar
                 bottomBar
             }
         }
-        .preferredColorScheme(.dark)
         .onAppear {
             engine.configure()
             engine.start()
@@ -69,7 +146,7 @@ struct ProCameraView: View {
     // MARK: - Top Toolbar
 
     private var topToolbar: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 12) {
             Button {
                 engine.isProRAWEnabled.toggle()
                 HapticFeedback.light()
@@ -129,14 +206,13 @@ struct ProCameraView: View {
             }
         }
         .padding(.horizontal)
-        .padding(.top, 8)
+        .padding(.top, 48)
     }
 
     // MARK: - Manual Controls Bar
 
     private var manualControlsBar: some View {
         VStack(spacing: 8) {
-            // Slider depending on selected tab
             switch selectedControl {
             case .exposure:
                 HStack {
@@ -179,7 +255,6 @@ struct ProCameraView: View {
                 .padding(.horizontal)
             }
 
-            // Tab bar selector
             HStack(spacing: 6) {
                 ForEach(ManualControlTab.allCases) { tab in
                     Button {
@@ -204,21 +279,26 @@ struct ProCameraView: View {
     // MARK: - Bottom Bar
 
     private var bottomBar: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
             // Lens Picker
-            HStack(spacing: 14) {
+            HStack(spacing: 12) {
                 ForEach(ProLens.allCases) { lens in
                     Button {
                         engine.switchLens(lens)
                     } label: {
                         Text(lens.label)
-                            .font(.subheadline.weight(engine.activeLens == lens ? .bold : .medium))
-                            .frame(width: 44, height: 44)
-                            .background(engine.activeLens == lens ? Color.white.opacity(0.25) : Color.black.opacity(0.4), in: Circle())
-                            .foregroundStyle(engine.activeLens == lens ? Color.yellow : Color.white)
+                            .font(.system(size: 12, weight: engine.activeLens == lens ? .black : .bold))
+                            .frame(width: 38, height: 38)
+                            .background(engine.activeLens == lens ? Color.yellow : Color.black.opacity(0.55), in: Circle())
+                            .foregroundStyle(engine.activeLens == lens ? Color.black : Color.white)
+                            .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 0.8))
                     }
                 }
             }
+
+            // Mode Selector Row (FOTO | VIDEO | NOCTURNO)
+            CameraModeSelectorRow(currentMode: $currentMode)
+                .padding(.top, 2)
 
             // Shutter Button Row
             HStack {
@@ -255,14 +335,25 @@ struct ProCameraView: View {
 
                 Spacer()
 
-                // Spacer to balance
-                Color.clear
-                    .frame(width: 48, height: 48)
+                // Zoom Wheel toggle button
+                Button {
+                    withAnimation(.spring(response: 0.25)) {
+                        showZoomWheel.toggle()
+                    }
+                    HapticFeedback.selection()
+                } label: {
+                    Image(systemName: "dial.low.fill")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: 48, height: 48)
+                        .background(showZoomWheel ? Color.yellow : Color.black.opacity(0.6), in: Circle())
+                        .foregroundStyle(showZoomWheel ? Color.black : Color.white)
+                        .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 1))
+                }
             }
             .padding(.horizontal, 30)
         }
-        .padding(.bottom, 16)
-        .background(.black.opacity(0.8))
+        .padding(.bottom, 12)
+        .background(.black.opacity(0.85))
     }
 }
 
@@ -275,13 +366,11 @@ private struct CompositionGridView: View {
             let h = geo.size.height
 
             Path { path in
-                // Vertical thirds
                 path.move(to: CGPoint(x: w / 3, y: 0))
                 path.addLine(to: CGPoint(x: w / 3, y: h))
                 path.move(to: CGPoint(x: 2 * w / 3, y: 0))
                 path.addLine(to: CGPoint(x: 2 * w / 3, y: h))
 
-                // Horizontal thirds
                 path.move(to: CGPoint(x: 0, y: h / 3))
                 path.addLine(to: CGPoint(x: w, y: h / 3))
                 path.move(to: CGPoint(x: 0, y: 2 * h / 3))
