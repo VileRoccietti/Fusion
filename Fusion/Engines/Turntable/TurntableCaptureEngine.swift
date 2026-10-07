@@ -7,7 +7,7 @@ import os
 @MainActor
 @Observable
 final class TurntableCaptureEngine: ScanEngine {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "turntable")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "turntable")
 
     static let kind: ScanEngineKind = .turntable
 

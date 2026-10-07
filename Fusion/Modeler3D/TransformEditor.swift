@@ -7,7 +7,7 @@ import os
 
 /// Applies metric transformations, centering, ground alignment, and axis rotations
 enum TransformEditor {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "transform")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "transform")
 
     enum Axis {
         case x, y, z

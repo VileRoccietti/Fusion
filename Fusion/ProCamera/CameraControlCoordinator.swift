@@ -15,20 +15,16 @@ final class CameraControlCoordinator: NSObject {
         guard let session else { return }
 
         // iOS 18 Camera Control API
-        #if compiler(>=6.0)
         if #available(iOS 18.0, *) {
             guard session.supportsControls else { return }
+            guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else { return }
 
-            // Exposure Bias Slider on physical Camera Control
-            let exposureSlider = AVCaptureSystemExposureBiasSlider(device: AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)!) { [weak self] bias in
-                guard self != nil else { return }
-                // Handle exposure control from button
-            }
-
+            session.beginConfiguration()
+            let exposureSlider = AVCaptureSystemExposureBiasSlider(device: device)
             if session.canAddControl(exposureSlider) {
                 session.addControl(exposureSlider)
             }
+            session.commitConfiguration()
         }
-        #endif
     }
 }

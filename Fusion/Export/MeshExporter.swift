@@ -61,7 +61,7 @@ enum MeshExportError: LocalizedError {
 }
 
 enum MeshExporter {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "export")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "export")
 
     /// Converts a model USDZ into target format, returning the exported file URL
     static func export(

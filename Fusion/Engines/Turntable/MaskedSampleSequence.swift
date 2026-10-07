@@ -22,7 +22,7 @@ struct MaskedSampleSequence: Sequence {
     }
 
     struct Iterator: IteratorProtocol {
-        private static let logger = Logger(subsystem: "com.example.ObjectScanner", category: "samples")
+        private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "samples")
 
         let imageURLs: [URL]
         let normalizedRect: CGRect?

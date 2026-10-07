@@ -20,7 +20,7 @@ import simd
 @MainActor
 @Observable
 final class RoomKeyframeCollector {
-    private static let logger = Logger(subsystem: "com.example.ObjectScanner", category: "keyframes")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "keyframes")
 
     /// Below this the solver has nothing to work with, so the attempt is skipped
     /// rather than run and failed.

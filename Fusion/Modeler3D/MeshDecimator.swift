@@ -6,7 +6,7 @@ import os
 
 /// Decimates and simplifies dense 3D polygonal meshes for real-time performance, web, or games
 enum MeshDecimator {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "decimator")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "decimator")
 
     enum DecimationLevel: Float, CaseIterable, Identifiable, Sendable {
         case original = 1.0
@@ -108,7 +108,7 @@ enum MeshDecimator {
                             geometryType: .triangles,
                             material: submesh.material
                         )
-                        mesh.submeshes = [simplifiedSubmesh]
+                        mesh.submeshes = NSMutableArray(array: [simplifiedSubmesh])
                     }
                 }
             }

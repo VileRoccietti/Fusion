@@ -3,7 +3,7 @@ import os
 
 /// AVCaptureSession coordinator for tripod turntable scanning
 final class PhotoCaptureCoordinator: NSObject, @unchecked Sendable {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "turntable")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "turntable")
 
     enum SetupError: LocalizedError {
         case noCamera
@@ -24,7 +24,7 @@ final class PhotoCaptureCoordinator: NSObject, @unchecked Sendable {
     private(set) var megapixels = 0
 
     private let photoOutput = AVCapturePhotoOutput()
-    private let sessionQueue = DispatchQueue(label: "com.vile.ObjectScannerPro.turntable")
+    private let sessionQueue = DispatchQueue(label: "com.vileroccietti.Fusion.turntable")
     private let imagesDirectory: URL
 
     private var device: AVCaptureDevice?

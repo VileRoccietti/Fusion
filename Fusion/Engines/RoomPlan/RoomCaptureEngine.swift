@@ -7,7 +7,7 @@ import os
 @MainActor
 @Observable
 final class RoomCaptureEngine: ScanEngine {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "roomplan")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "roomplan")
 
     static let kind: ScanEngineKind = .roomPlan
 

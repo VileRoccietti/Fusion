@@ -8,7 +8,7 @@ import os
 @MainActor
 @Observable
 final class ObjectCaptureEngine: ScanEngine {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "objectcapture")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "objectcapture")
 
     static let kind: ScanEngineKind = .objectCapture
 

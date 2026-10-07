@@ -6,7 +6,7 @@ import os
 @MainActor
 @Observable
 final class ScanStorage {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "storage")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "storage")
 
     private(set) var scans: [ScanRecord] = []
 

@@ -12,6 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build & Package IPA
@@ -43,6 +46,7 @@ jobs:
       - name: Build & Archive iOS App
         run: |
           mkdir -p build
+          set -o pipefail
           xcodebuild archive \
             -project Fusion.xcodeproj \
             -scheme Fusion \
@@ -52,7 +56,30 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            COMPILER_INDEX_STORE_ENABLE=NO
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            COMPILER_INDEX_STORE_ENABLE=NO 2>&1 | tee build/xcodebuild.log || true
+
+          if [ ! -d "build/Fusion.xcarchive" ]; then
+            echo "::error title=Build Failure::Xcodebuild archive failed. See step summary."
+            echo "## Xcodebuild Errors" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            grep -E "error:|fatal error:" build/xcodebuild.log | tail -n 50 >> $GITHUB_STEP_SUMMARY || true
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "## Last 40 lines of build log" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -n 40 build/xcodebuild.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            exit 65
+          fi
+
+      - name: Upload Build Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Xcodebuild-Log
+          path: build/xcodebuild.log
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Package Unsigned IPA (For TrollStore, AltStore, Sideloadly)
         run: |

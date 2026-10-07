@@ -2,6 +2,7 @@ import Foundation
 import RealityKit
 import ARKit
 import SwiftUI
+import UIKit
 import simd
 
 /// AR Measurement data representation

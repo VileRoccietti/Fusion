@@ -62,7 +62,7 @@ struct ScanSetupView: View {
         .alert("Acceso a la cámara restringido", isPresented: $permissionDenied) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("Ve a Configuración > ObjectScannerPro para permitir el acceso a la cámara.")
+            Text("Ve a Configuración > Fusion para permitir el acceso a la cámara.")
         }
         .onChange(of: profile) { _, _ in
             overriddenKind = nil

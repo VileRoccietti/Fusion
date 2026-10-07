@@ -4,7 +4,7 @@ import os
 
 /// High-performance RealityKit photogrammetry reconstructor running on device
 struct PhotogrammetryReconstructor {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "photogrammetry")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "photogrammetry")
 
     struct Output {
         let modelURL: URL
@@ -45,7 +45,7 @@ struct PhotogrammetryReconstructor {
         var effectiveMask = maskRect
         if maskRect != nil, let probe = imageURLs.first {
             do {
-                _ = try await PhotogrammetrySample(contentsOf: probe)
+                _ = try PhotogrammetrySample(contentsOf: probe)
             } catch {
                 effectiveMask = nil
                 Self.logger.error("No se pudo leer la muestra con máscara: \(error.localizedDescription, privacy: .public)")

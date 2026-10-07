@@ -3,7 +3,7 @@ import os
 
 /// Bundles captured high-resolution stills, depth maps, and poses into a ZIP archive
 enum SourceImageBundle {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "bundle")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "bundle")
 
     enum BundleError: LocalizedError {
         case imagesMissing

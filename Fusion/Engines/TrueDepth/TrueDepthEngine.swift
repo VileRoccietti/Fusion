@@ -8,7 +8,7 @@ import os
 @MainActor
 @Observable
 final class TrueDepthEngine: ScanEngine {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "truedepth")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "truedepth")
 
     static let kind: ScanEngineKind = .trueDepth
 
@@ -40,7 +40,7 @@ final class TrueDepthEngine: ScanEngine {
     private let storage: ScanStorage
     private var receiver: DepthFrameReceiver?
     private var workspace: ScanWorkspace?
-    private let frameQueue = DispatchQueue(label: "com.vile.ObjectScannerPro.depth", qos: .userInitiated)
+    private let frameQueue = DispatchQueue(label: "com.vileroccietti.Fusion.depth", qos: .userInitiated)
 
     init(storage: ScanStorage) {
         self.storage = storage

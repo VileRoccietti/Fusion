@@ -254,7 +254,7 @@ private struct ARViewContainer: UIViewRepresentable {
 
             Task { @MainActor in
                 do {
-                    let entity = try await ModelEntity.loadModel(contentsOf: parent.modelURL)
+                    let entity = try ModelEntity.loadModel(contentsOf: parent.modelURL)
                     entity.generateCollisionShapes(recursive: true)
                     arView.installGestures([.rotation, .translation], for: entity)
 

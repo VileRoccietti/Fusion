@@ -4,7 +4,7 @@ import os
 
 /// High-performance binary PLY file parser and writer
 enum PointCloudFile {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "pointcloud")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "pointcloud")
 
     enum FileError: LocalizedError {
         case empty
@@ -27,7 +27,7 @@ enum PointCloudFile {
 
         var header = "ply\n"
         header += "format binary_little_endian 1.0\n"
-        header += "comment ObjectScannerPro Metric Point Cloud\n"
+        header += "comment Fusion Metric Point Cloud\n"
         header += "element vertex \(points.count)\n"
         header += "property float x\n"
         header += "property float y\n"

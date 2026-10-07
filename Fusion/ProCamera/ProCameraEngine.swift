@@ -31,12 +31,12 @@ enum ProLens: String, CaseIterable, Identifiable, Sendable {
 @MainActor
 @Observable
 final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "procamera")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "procamera")
 
     let session = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
     private let videoOutput = AVCaptureVideoDataOutput()
-    private let cameraQueue = DispatchQueue(label: "com.vile.ObjectScannerPro.cameraQueue")
+    private let cameraQueue = DispatchQueue(label: "com.vileroccietti.Fusion.cameraQueue")
 
     private(set) var activeDevice: AVCaptureDevice?
     private(set) var activeLens: ProLens = .wide
@@ -288,9 +288,23 @@ final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureV
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
 
+    private func finishCaptureOnMain(image: UIImage?) {
+        self.lastCapturedImage = image
+        self.isCapturing = false
+        if image != nil {
+            HapticFeedback.success()
+        }
+    }
+
+    private func updateHistogramOnMain(_ bins: [Float]) {
+        self.histogramBins = bins
+    }
+
     nonisolated func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard error == nil, let data = photo.fileDataRepresentation() else {
-            Task { @MainActor in self.isCapturing = false }
+            Task { @MainActor [weak self] in
+                self?.finishCaptureOnMain(image: nil)
+            }
             return
         }
 
@@ -301,10 +315,8 @@ final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureV
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
 
-        Task { @MainActor in
-            self.lastCapturedImage = image
-            self.isCapturing = false
-            HapticFeedback.success()
+        Task { @MainActor [weak self] in
+            self?.finishCaptureOnMain(image: image)
         }
     }
 
@@ -345,8 +357,8 @@ final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureV
         let maxCount = Float(buckets.max() ?? 1)
         let normalized = buckets.map { Float($0) / max(maxCount, 1.0) }
 
-        Task { @MainActor in
-            self.histogramBins = normalized
+        Task { @MainActor [weak self] in
+            self?.updateHistogramOnMain(normalized)
         }
     }
 }

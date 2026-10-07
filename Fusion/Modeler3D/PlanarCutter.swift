@@ -7,7 +7,7 @@ import os
 
 /// Slices and discards unwanted floor, turntable, or table geometry beneath the scanned object
 enum PlanarCutter {
-    private static let logger = Logger(subsystem: "com.vile.ObjectScannerPro", category: "cutter")
+    private static let logger = Logger(subsystem: "com.vileroccietti.Fusion", category: "cutter")
 
     enum CutterError: LocalizedError {
         case fileMissing
@@ -113,7 +113,7 @@ enum PlanarCutter {
                                 geometryType: .triangles,
                                 material: submesh.material
                             )
-                            object.submeshes = [newSubmesh]
+                            object.submeshes = NSMutableArray(array: [newSubmesh])
                         }
                     }
                 }
