@@ -625,19 +625,21 @@ final class ProVideoEngine: NSObject, AVCaptureFileOutputRecordingDelegate {
         let startTime = Date()
 
         recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            guard let self else { return }
-            let elapsed = Date().timeIntervalSince(startTime)
-            self.recordedSeconds = elapsed
+            Task { @MainActor in
+                guard let self else { return }
+                let elapsed = Date().timeIntervalSince(startTime)
+                self.recordedSeconds = elapsed
 
-            let hours = Int(elapsed) / 3600
-            let minutes = (Int(elapsed) % 3600) / 60
-            let seconds = Int(elapsed) % 60
-            let frames = Int((elapsed.truncatingRemainder(dividingBy: 1.0)) * Double(self.currentFPS))
-            self.timecodeString = String(format: "%02d:%02d:%02d:%02d", hours, minutes, seconds, frames)
+                let hours = Int(elapsed) / 3600
+                let minutes = (Int(elapsed) % 3600) / 60
+                let seconds = Int(elapsed) % 60
+                let frames = Int((elapsed.truncatingRemainder(dividingBy: 1.0)) * Double(self.currentFPS))
+                self.timecodeString = String(format: "%02d:%02d:%02d:%02d", hours, minutes, seconds, frames)
 
-            // Dynamic Stereo VU Audio levels simulation
-            self.audioLevelLeft = -18.0 + Float.random(in: -12...4)
-            self.audioLevelRight = -19.0 + Float.random(in: -12...5)
+                // Dynamic Stereo VU Audio levels simulation
+                self.audioLevelLeft = -18.0 + Float.random(in: -12...4)
+                self.audioLevelRight = -19.0 + Float.random(in: -12...5)
+            }
         }
     }
 

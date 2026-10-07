@@ -17,6 +17,15 @@ enum ProLens: String, CaseIterable, Identifiable, Sendable {
 
     var label: String { rawValue }
 
+    var zoomFactor: CGFloat {
+        switch self {
+        case .ultraWide: 0.5
+        case .wide: 1.0
+        case .wideCrop: 2.0
+        case .telephoto: 5.0
+        }
+    }
+
     var focalLengthEquivalent: String {
         switch self {
         case .ultraWide: "13 mm"

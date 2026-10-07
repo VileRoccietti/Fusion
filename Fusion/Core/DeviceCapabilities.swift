@@ -87,11 +87,6 @@ enum DeviceCapabilities {
             if !format.secondaryNativeResolutionZoomFactors.isEmpty {
                 return true
             }
-            // Check highResolutionStillImageDimensions
-            let high = format.highResolutionStillImageDimensions
-            if high.width >= 7000 || high.height >= 5000 {
-                return true
-            }
             let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
             if dims.width >= 7000 || dims.height >= 5000 {
                 return true

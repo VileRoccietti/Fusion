@@ -119,15 +119,19 @@ final class HegesDepthEngine: NSObject, ARSessionDelegate {
     // MARK: - ARSessionDelegate
 
     nonisolated func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        Task { @MainActor [weak self] in
+            self?.processFrame(frame)
+        }
+    }
+
+    private func processFrame(_ frame: ARFrame) {
         let now = Date()
         let dt = now.timeIntervalSince(lastFrameTime)
         let fps = dt > 0 ? (1.0 / dt) : 60.0
 
         guard let depthData = frame.sceneDepth ?? frame.smoothedSceneDepth else {
-            Task { @MainActor in
-                self.currentFps = fps
-                self.lastFrameTime = now
-            }
+            self.currentFps = fps
+            self.lastFrameTime = now
             return
         }
 
@@ -177,15 +181,13 @@ final class HegesDepthEngine: NSObject, ARSessionDelegate {
             }
         }
 
-        Task { @MainActor in
-            self.livePointCount = extractedPoints.count
-            self.currentFps = fps * 0.2 + self.currentFps * 0.8
-            self.lastFrameTime = now
+        self.livePointCount = extractedPoints.count
+        self.currentFps = fps * 0.2 + self.currentFps * 0.8
+        self.lastFrameTime = now
 
-            if !self.isFrozen {
-                self.frozenVertices = extractedPoints
-                self.frozenColors = extractedColors
-            }
+        if !self.isFrozen {
+            self.frozenVertices = extractedPoints
+            self.frozenColors = extractedColors
         }
     }
 
