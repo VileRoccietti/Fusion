@@ -278,7 +278,7 @@ final class ProCameraEngine: NSObject, AVCapturePhotoCaptureDelegate, AVCaptureV
 
         var settings: AVCapturePhotoSettings
         if isProRAWEnabled && photoOutput.availableRawPhotoPixelFormatTypes.contains(kCVPixelFormatType_14Bayer_RGGB) {
-            settings = AVCapturePhotoSettings(rawPhotoPixelFormatType: kCVPixelFormatType_14Bayer_RGGB)
+            settings = AVCapturePhotoSettings(rawPixelFormatType: kCVPixelFormatType_14Bayer_RGGB)
         } else {
             settings = AVCapturePhotoSettings()
         }
