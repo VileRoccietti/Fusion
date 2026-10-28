@@ -1,0 +1,14 @@
+{
+  "id": "onyx",
+  "name": "Liquid Glass (Onyx OLED)",
+  "description": "Rediseño Apple Liquid Glass sobre el tema Onyx OLED puro de Discord.",
+  "authors": [
+    {
+      "name": "Vile & IMA",
+      "id": "1"
+    }
+  ],
+  "version": "1.0.3",
+  "type": "theme",
+  "main": "bundle.json"
+}

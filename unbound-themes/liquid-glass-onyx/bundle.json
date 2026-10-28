@@ -1,0 +1,510 @@
+{
+  "name": "Liquid Glass & iMessage",
+  "description": "Redise\u00f1o Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage.",
+  "authors": [
+    {
+      "name": "Vile & IMA",
+      "id": "1"
+    }
+  ],
+  "type": "midnight",
+  "raw": {
+    "systemBlueColor": "#007AFF",
+    "systemBackgroundColor": "#000000",
+    "secondarySystemBackgroundColor": "#121214",
+    "tertiarySystemBackgroundColor": "#18181B",
+    "systemGroupedBackgroundColor": "#000000",
+    "secondarySystemGroupedBackgroundColor": "#121214",
+    "tertiarySystemGroupedBackgroundColor": "#18181B",
+    "blackColor": "#000000",
+    "separatorColor": "#2C2C2E",
+    "opaqueSeparatorColor": "#38383A",
+    "labelColor": "#FFFFFF",
+    "secondaryLabelColor": "#8E8E93",
+    "tertiaryLabelColor": "#636366",
+    "quaternaryLabelColor": "#48484A",
+    "linkColor": "#0A84FF",
+    "PRIMARY_100": "#FFFFFF",
+    "PRIMARY_200": "#F2F2F7",
+    "PRIMARY_300": "#E5E5EA",
+    "PRIMARY_400": "#D1D1D6",
+    "PRIMARY_500": "#C7C7CC",
+    "PRIMARY_600": "#8E8E93",
+    "PRIMARY_700": "#48484A",
+    "PRIMARY_800": "#2C2C2E",
+    "PRIMARY_900": "#1C1C1E",
+    "BRAND_500": "#007AFF",
+    "PLUM_17": "#000000",
+    "BLACK": "#000000",
+    "WHITE": "#FFFFFF"
+  },
+  "semantic": {
+    "backgroundColor": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_COLOR": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundBaseLow": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BACKGROUND_BASE_LOW": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "backgroundBaseLower": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_BASE_LOWER": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundBaseLowest": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_BASE_LOWEST": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundPrimary": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_PRIMARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundSecondary": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BACKGROUND_SECONDARY": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "backgroundSecondaryAlt": {
+      "type": "color",
+      "value": "#18181B",
+      "opacity": 0.85
+    },
+    "BACKGROUND_SECONDARY_ALT": {
+      "type": "color",
+      "value": "#18181B",
+      "opacity": 0.85
+    },
+    "backgroundTertiary": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_TERTIARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundAccent": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "BACKGROUND_ACCENT": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "backgroundFloating": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "BACKGROUND_FLOATING": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "backgroundMobilePrimary": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_MOBILE_PRIMARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "backgroundMobileSecondary": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BACKGROUND_MOBILE_SECONDARY": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "backgroundSurfaceHigh": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "BACKGROUND_SURFACE_HIGH": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "backgroundSurfaceHighest": {
+      "type": "color",
+      "value": "#2C2C2E",
+      "opacity": 0.85
+    },
+    "BACKGROUND_SURFACE_HIGHEST": {
+      "type": "color",
+      "value": "#2C2C2E",
+      "opacity": 0.85
+    },
+    "backgroundModMuted": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.04
+    },
+    "BACKGROUND_MOD_MUTED": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.04
+    },
+    "backgroundModNormal": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "BACKGROUND_MOD_NORMAL": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "backgroundModStrong": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.15
+    },
+    "BACKGROUND_MOD_STRONG": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.15
+    },
+    "backgroundModSubtle": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.06
+    },
+    "BACKGROUND_MOD_SUBTLE": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.06
+    },
+    "chatBackground": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "CHAT_BACKGROUND": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "chatInputBackground": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.75
+    },
+    "CHAT_INPUT_BACKGROUND": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.75
+    },
+    "chatInputContainerBackground": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.75
+    },
+    "CHAT_INPUT_CONTAINER_BACKGROUND": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.75
+    },
+    "messageAutomodBackgroundDefault": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "MESSAGE_AUTOMOD_BACKGROUND": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "messageHighlightBackgroundDefault": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.15
+    },
+    "MESSAGE_HIGHLIGHT_BACKGROUND": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.15
+    },
+    "textDefault": {
+      "type": "color",
+      "value": "#F2F2F7"
+    },
+    "TEXT_DEFAULT": {
+      "type": "color",
+      "value": "#F2F2F7"
+    },
+    "textNormal": {
+      "type": "color",
+      "value": "#F2F2F7"
+    },
+    "TEXT_NORMAL": {
+      "type": "color",
+      "value": "#F2F2F7"
+    },
+    "textMuted": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "TEXT_MUTED": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "textLink": {
+      "type": "color",
+      "value": "#0A84FF"
+    },
+    "TEXT_LINK": {
+      "type": "color",
+      "value": "#0A84FF"
+    },
+    "textPositive": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "TEXT_POSITIVE": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "textWarning": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "TEXT_WARNING": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "textDanger": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "TEXT_DANGER": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "textBrand": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "TEXT_BRAND": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "headerPrimary": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "HEADER_PRIMARY": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "headerSecondary": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "HEADER_SECONDARY": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "headerTextColor": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "HEADER_TEXT_COLOR": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "headerColor": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "HEADER_COLOR": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "headerIconColor": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "HEADER_ICON_COLOR": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "interactiveNormal": {
+      "type": "color",
+      "value": "#AEAEB2"
+    },
+    "INTERACTIVE_NORMAL": {
+      "type": "color",
+      "value": "#AEAEB2"
+    },
+    "interactiveHover": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "INTERACTIVE_HOVER": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "interactiveActive": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "INTERACTIVE_ACTIVE": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "interactiveMuted": {
+      "type": "color",
+      "value": "#48484A"
+    },
+    "INTERACTIVE_MUTED": {
+      "type": "color",
+      "value": "#48484A"
+    },
+    "interactiveBackgroundHover": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "INTERACTIVE_BG_HOVER": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "interactiveBackgroundSelected": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.25
+    },
+    "INTERACTIVE_BG_SELECTED": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.25
+    },
+    "statusPositive": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "STATUS_POSITIVE": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "statusOnline": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "STATUS_ONLINE": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "statusIdle": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "STATUS_IDLE": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "statusDnd": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "STATUS_DND": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "statusOffline": {
+      "type": "color",
+      "value": "#636366"
+    },
+    "STATUS_OFFLINE": {
+      "type": "color",
+      "value": "#636366"
+    },
+    "cardPrimaryBg": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.7
+    },
+    "CARD_PRIMARY_BG": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.7
+    },
+    "cardSecondaryBg": {
+      "type": "color",
+      "value": "#2C2C2E",
+      "opacity": 0.7
+    },
+    "CARD_SECONDARY_BG": {
+      "type": "color",
+      "value": "#2C2C2E",
+      "opacity": 0.7
+    },
+    "badgeBrandBg": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "BADGE_BRAND_BG": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "badgeBrandText": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "BADGE_BRAND_TEXT": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "channelIcon": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "CHANNEL_ICON": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "channelsDefault": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "CHANNELS_DEFAULT": {
+      "type": "color",
+      "value": "#8E8E93"
+    }
+  },
+  "background": {
+    "blur": 35,
+    "alpha": 0.88,
+    "color": "#000000"
+  }
+}
