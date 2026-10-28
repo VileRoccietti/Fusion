@@ -4,10 +4,10 @@
   "description": "Muestra indicadores de plataforma Apple para Desktop, iPhone y Web.",
   "authors": [
     {
-      "name": "Vile",
+      "name": "Vile & IMA",
       "id": "1"
     }
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js"
 }

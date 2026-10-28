@@ -1,14 +1,14 @@
 {
   "id": "unbound.liquid-glass",
   "name": "Liquid Glass & iMessage",
-  "description": "Rediseño Apple Liquid Glass, OLED y burbujas iMessage para Discord iOS.",
+  "description": "Rediseño Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage.",
   "authors": [
     {
-      "name": "Vile",
+      "name": "Vile & IMA",
       "id": "1"
     }
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "theme",
   "main": "bundle.json"
 }

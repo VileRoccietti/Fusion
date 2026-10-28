@@ -1,58 +1,14 @@
 {
   "name": "Liquid Glass & iMessage",
-  "description": "Rediseño completo estilo Apple: Liquid Glass, burbujas iMessage y píldora flotante.",
+  "description": "Redise\u00f1o Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage.",
   "authors": [
     {
       "name": "Vile & IMA",
       "id": "1"
     }
   ],
-  "spec": 2,
-  "semanticColors": {
-    "HEADER_PRIMARY": ["#000000", "#FFFFFF"],
-    "HEADER_SECONDARY": ["#3C3C43", "#8E8E93"],
-    "TEXT_NORMAL": ["#000000", "#F2F2F7"],
-    "TEXT_MUTED": ["#686870", "#8E8E93"],
-    "TEXT_LINK": ["#007AFF", "#0A84FF"],
-    "TEXT_POSITIVE": ["#34C759", "#30D158"],
-    "TEXT_WARNING": ["#FF9500", "#FFD60A"],
-    "TEXT_DANGER": ["#FF3B30", "#FF453A"],
-    "TEXT_BRAND": ["#007AFF", "#0A84FF"],
-
-    "BACKGROUND_PRIMARY": ["#FFFFFF", "#00000000"],
-    "BACKGROUND_SECONDARY": ["#F2F2F7", "#121214D9"],
-    "BACKGROUND_SECONDARY_ALT": ["#E5E5EA", "#18181BD9"],
-    "BACKGROUND_TERTIARY": ["#E5E5EA", "#0B0B0ED9"],
-    "BACKGROUND_ACCENT": ["#007AFF", "#0A84FF"],
-    "BACKGROUND_FLOATING": ["#FFFFFFCC", "#1C1C1ECC"],
-    "BACKGROUND_MOBILE_PRIMARY": ["#FFFFFF", "#000000"],
-    "BACKGROUND_MOBILE_SECONDARY": ["#F2F2F7", "#121214D9"],
-
-    "CHAT_BACKGROUND": ["#FFFFFF", "#00000000"],
-    "CHAT_INPUT_CONTAINER_BACKGROUND": ["#F2F2F7B3", "#1C1C1EB3"],
-
-    "MESSAGE_BACKGROUND_RECEIVED": ["#E9E9EB", "#26252AE6"],
-    "MESSAGE_BACKGROUND_SENT": ["#007AFF", "#007AFFE6"],
-
-    "CARD_PRIMARY_BG": ["#FFFFFF99", "#1C1C1E99"],
-    "CARD_SECONDARY_BG": ["#F2F2F799", "#2C2C2E99"],
-
-    "CHANNEL_ICON": ["#8E8E93", "#8E8E93"],
-    "CHANNELS_DEFAULT": ["#8E8E93", "#8E8E93"],
-    "INTERACTIVE_NORMAL": ["#3C3C43", "#AEAEB2"],
-    "INTERACTIVE_HOVER": ["#1C1C1E", "#FFFFFF"],
-    "INTERACTIVE_ACTIVE": ["#007AFF", "#0A84FF"],
-    "INTERACTIVE_MUTED": ["#C7C7CC", "#48484A"],
-
-    "STATUS_ONLINE": ["#34C759", "#30D158"],
-    "STATUS_IDLE": ["#FF9500", "#FFD60A"],
-    "STATUS_DND": ["#FF3B30", "#FF453A"],
-    "STATUS_OFFLINE": ["#8E8E93", "#636366"],
-
-    "BADGE_BRAND_BG": ["#FF3B30", "#FF453A"],
-    "BADGE_BRAND_TEXT": ["#FFFFFF", "#FFFFFF"]
-  },
-  "rawColors": {
+  "type": "midnight",
+  "raw": {
     "PRIMARY_100": "#FFFFFF",
     "PRIMARY_200": "#F2F2F7",
     "PRIMARY_300": "#E5E5EA",
@@ -62,11 +18,215 @@
     "PRIMARY_700": "#48484A",
     "PRIMARY_800": "#2C2C2E",
     "PRIMARY_900": "#1C1C1E",
-    "BRAND_500": "#007AFF"
+    "BRAND_500": "#007AFF",
+    "PLUM_17": "#000000",
+    "BLACK": "#000000",
+    "WHITE": "#FFFFFF"
+  },
+  "semantic": {
+    "BACKGROUND_PRIMARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_SECONDARY": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BACKGROUND_SECONDARY_ALT": {
+      "type": "color",
+      "value": "#18181B",
+      "opacity": 0.85
+    },
+    "BACKGROUND_TERTIARY": {
+      "type": "color",
+      "value": "#0B0B0E",
+      "opacity": 0.85
+    },
+    "BACKGROUND_ACCENT": {
+      "type": "color",
+      "value": "#007AFF"
+    },
+    "BACKGROUND_FLOATING": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "BACKGROUND_MOBILE_PRIMARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BACKGROUND_MOBILE_SECONDARY": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BACKGROUND_MODIFIER_ACCENT": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.2
+    },
+    "BACKGROUND_MODIFIER_ACTIVE": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.12
+    },
+    "BACKGROUND_MODIFIER_HOVER": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "BACKGROUND_MODIFIER_SELECTED": {
+      "type": "color",
+      "value": "#007AFF",
+      "opacity": 0.25
+    },
+    "BG_BASE_PRIMARY": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "BG_BASE_SECONDARY": {
+      "type": "color",
+      "value": "#121214",
+      "opacity": 0.85
+    },
+    "BG_BASE_TERTIARY": {
+      "type": "color",
+      "value": "#0B0B0E",
+      "opacity": 0.85
+    },
+    "BG_MOD_FAINT": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.04
+    },
+    "BG_MOD_STRONG": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.15
+    },
+    "BG_MOD_SUBTLE": {
+      "type": "color",
+      "value": "#FFFFFF",
+      "opacity": 0.08
+    },
+    "BG_SURFACE_OVERLAY": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.8
+    },
+    "BG_SURFACE_RAISED": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.7
+    },
+    "CHAT_BACKGROUND": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "CHAT_INPUT_CONTAINER_BACKGROUND": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.75
+    },
+    "CARD_PRIMARY_BG": {
+      "type": "color",
+      "value": "#1C1C1E",
+      "opacity": 0.7
+    },
+    "CARD_SECONDARY_BG": {
+      "type": "color",
+      "value": "#2C2C2E",
+      "opacity": 0.7
+    },
+    "HEADER_PRIMARY": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "HEADER_SECONDARY": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "TEXT_NORMAL": {
+      "type": "color",
+      "value": "#F2F2F7"
+    },
+    "TEXT_MUTED": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "TEXT_LINK": {
+      "type": "color",
+      "value": "#0A84FF"
+    },
+    "TEXT_POSITIVE": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "TEXT_WARNING": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "TEXT_DANGER": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "TEXT_BRAND": {
+      "type": "color",
+      "value": "#0A84FF"
+    },
+    "INTERACTIVE_NORMAL": {
+      "type": "color",
+      "value": "#AEAEB2"
+    },
+    "INTERACTIVE_HOVER": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "INTERACTIVE_ACTIVE": {
+      "type": "color",
+      "value": "#0A84FF"
+    },
+    "INTERACTIVE_MUTED": {
+      "type": "color",
+      "value": "#48484A"
+    },
+    "STATUS_ONLINE": {
+      "type": "color",
+      "value": "#30D158"
+    },
+    "STATUS_IDLE": {
+      "type": "color",
+      "value": "#FFD60A"
+    },
+    "STATUS_DND": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "STATUS_OFFLINE": {
+      "type": "color",
+      "value": "#636366"
+    },
+    "CHANNEL_ICON": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "CHANNELS_DEFAULT": {
+      "type": "color",
+      "value": "#8E8E93"
+    },
+    "BADGE_BRAND_BG": {
+      "type": "color",
+      "value": "#FF453A"
+    },
+    "BADGE_BRAND_TEXT": {
+      "type": "color",
+      "value": "#FFFFFF"
+    }
   },
   "background": {
     "blur": 35,
     "alpha": 0.88,
-    "color": "#08080A"
+    "color": "#000000"
   }
 }
