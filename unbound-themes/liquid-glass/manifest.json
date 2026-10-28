@@ -1,14 +1,14 @@
 {
-  "id": "unbound.liquid-glass",
-  "name": "Liquid Glass & iMessage",
-  "description": "Rediseño Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage.",
+  "id": "midnight",
+  "name": "Liquid Glass (Midnight)",
+  "description": "Rediseño Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage para base Midnight.",
   "authors": [
     {
       "name": "Vile & IMA",
       "id": "1"
     }
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "theme",
   "main": "bundle.json"
 }

@@ -1,0 +1,14 @@
+{
+  "id": "dark",
+  "name": "Liquid Glass (Dark)",
+  "description": "Rediseño Apple Liquid Glass, OLED puro (#000000) y burbujas estilo iMessage para base Dark.",
+  "authors": [
+    {
+      "name": "Vile & IMA",
+      "id": "1"
+    }
+  ],
+  "version": "1.0.2",
+  "type": "theme",
+  "main": "bundle.json"
+}
