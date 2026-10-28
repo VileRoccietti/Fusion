@@ -1,0 +1,13 @@
+{
+  "id": "unbound.silent-typing",
+  "name": "Silent Typing",
+  "description": "Escribe de forma invisible sin enviar indicadores de escritura.",
+  "authors": [
+    {
+      "name": "Vile",
+      "id": "1"
+    }
+  ],
+  "version": "1.0.0",
+  "main": "index.js"
+}
