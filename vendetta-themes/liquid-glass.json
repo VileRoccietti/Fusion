@@ -1,0 +1,177 @@
+{
+  "name": "Liquid Glass (Apple OLED)",
+  "description": "Apple Liquid Glass, iMessage conversational bubbles, and pure OLED black for Discord iOS.",
+  "authors": [
+    {
+      "name": "Vile & IMA",
+      "id": "1"
+    }
+  ],
+  "spec": 2,
+  "semanticColors": {
+    "HEADER_PRIMARY": [
+      "#000000",
+      "#FFFFFF"
+    ],
+    "HEADER_SECONDARY": [
+      "#3C3C43",
+      "#8E8E93"
+    ],
+    "TEXT_NORMAL": [
+      "#000000",
+      "#F2F2F7"
+    ],
+    "TEXT_MUTED": [
+      "#686870",
+      "#8E8E93"
+    ],
+    "TEXT_LINK": [
+      "#007AFF",
+      "#0A84FF"
+    ],
+    "TEXT_POSITIVE": [
+      "#34C759",
+      "#30D158"
+    ],
+    "TEXT_WARNING": [
+      "#FF9500",
+      "#FFD60A"
+    ],
+    "TEXT_DANGER": [
+      "#FF3B30",
+      "#FF453A"
+    ],
+    "TEXT_BRAND": [
+      "#007AFF",
+      "#0A84FF"
+    ],
+    "BACKGROUND_PRIMARY": [
+      "#FFFFFF",
+      "#000000"
+    ],
+    "BACKGROUND_SECONDARY": [
+      "#F2F2F7",
+      "#121214"
+    ],
+    "BACKGROUND_SECONDARY_ALT": [
+      "#E5E5EA",
+      "#18181B"
+    ],
+    "BACKGROUND_TERTIARY": [
+      "#E5E5EA",
+      "#0B0B0E"
+    ],
+    "BACKGROUND_ACCENT": [
+      "#007AFF",
+      "#0A84FF"
+    ],
+    "BACKGROUND_FLOATING": [
+      "#FFFFFF",
+      "#1C1C1E"
+    ],
+    "BACKGROUND_MOBILE_PRIMARY": [
+      "#FFFFFF",
+      "#000000"
+    ],
+    "BACKGROUND_MOBILE_SECONDARY": [
+      "#F2F2F7",
+      "#121214"
+    ],
+    "BACKGROUND_MODIFIER_ACCENT": [
+      "#007AFF33",
+      "#0A84FF33"
+    ],
+    "BACKGROUND_MODIFIER_ACTIVE": [
+      "#0000001F",
+      "#FFFFFF1F"
+    ],
+    "BACKGROUND_MODIFIER_HOVER": [
+      "#00000014",
+      "#FFFFFF14"
+    ],
+    "BACKGROUND_MODIFIER_SELECTED": [
+      "#007AFF33",
+      "#0A84FF33"
+    ],
+    "CHAT_BACKGROUND": [
+      "#FFFFFF",
+      "#000000"
+    ],
+    "CHAT_INPUT_CONTAINER_BACKGROUND": [
+      "#F2F2F7",
+      "#1C1C1EB3"
+    ],
+    "CARD_PRIMARY_BG": [
+      "#FFFFFF",
+      "#1C1C1EB3"
+    ],
+    "CARD_SECONDARY_BG": [
+      "#F2F2F7",
+      "#2C2C2EB3"
+    ],
+    "INTERACTIVE_NORMAL": [
+      "#3C3C43",
+      "#AEAEB2"
+    ],
+    "INTERACTIVE_HOVER": [
+      "#1C1C1E",
+      "#FFFFFF"
+    ],
+    "INTERACTIVE_ACTIVE": [
+      "#007AFF",
+      "#0A84FF"
+    ],
+    "INTERACTIVE_MUTED": [
+      "#C7C7CC",
+      "#48484A"
+    ],
+    "STATUS_ONLINE": [
+      "#34C759",
+      "#30D158"
+    ],
+    "STATUS_IDLE": [
+      "#FF9500",
+      "#FFD60A"
+    ],
+    "STATUS_DND": [
+      "#FF3B30",
+      "#FF453A"
+    ],
+    "STATUS_OFFLINE": [
+      "#8E8E93",
+      "#636366"
+    ],
+    "CHANNEL_ICON": [
+      "#8E8E93",
+      "#8E8E93"
+    ],
+    "CHANNELS_DEFAULT": [
+      "#8E8E93",
+      "#8E8E93"
+    ],
+    "BADGE_BRAND_BG": [
+      "#FF3B30",
+      "#FF453A"
+    ],
+    "BADGE_BRAND_TEXT": [
+      "#FFFFFF",
+      "#FFFFFF"
+    ]
+  },
+  "rawColors": {
+    "PRIMARY_100": "#FFFFFF",
+    "PRIMARY_200": "#F2F2F7",
+    "PRIMARY_300": "#E5E5EA",
+    "PRIMARY_400": "#D1D1D6",
+    "PRIMARY_500": "#C7C7CC",
+    "PRIMARY_600": "#8E8E93",
+    "PRIMARY_700": "#48484A",
+    "PRIMARY_800": "#2C2C2E",
+    "PRIMARY_900": "#1C1C1E",
+    "BRAND_500": "#007AFF"
+  },
+  "background": {
+    "blur": 35,
+    "alpha": 0.88
+  }
+}
